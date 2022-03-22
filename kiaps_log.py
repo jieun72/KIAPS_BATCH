@@ -1,5 +1,6 @@
 import logging
 
+
 class KiapsLogging:
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
