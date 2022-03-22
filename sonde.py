@@ -36,13 +36,12 @@ def db_transfer():
                     result_list.append(mst_list + words)
                     # print(result_list)
 
-            df_dtl = pd.DataFrame(result_list)
-            df_dtl.columns = ["nobs", "type", "StnID", "lat", "lon", "StnHgt", "nlev", "ObsTime",
-                              "lev", "Pressure", "Height", "GPM", "T", "Td", "RH", "Wd", "Ws", "u", "v", "q", "vsign", "vlon", "vlat", "time"]
-            database.write_mysql('sonde', df_dtl)
+            df = pd.DataFrame(result_list)
+            df.columns = ["nobs", "type", "StnID", "lat", "lon", "StnHgt", "nlev", "ObsTime",
+                          "lev", "Pressure", "Height", "GPM", "T", "Td", "RH", "Wd", "Ws", "u", "v", "q", "vsign", "vlon", "vlat", "time"]
+            database.write_mysql('sonde', df)
 
-            logger.upload_info(
-                "Successfully uploaded the file {}".format("sonde_2020061600.txt"))
+            logger.upload_info("Successfully uploaded the file {}".format("sonde_2020061600.txt"))
             with open(log_path, "a") as writer:
                 writer.write("[INFO] [UPLOAD] [{}] Successfully uploaded the file {}\n".format(datetime.now().strftime(log_dt_format), "sonde_2020061600.txt"))
     except Exception as e:
