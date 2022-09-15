@@ -24,7 +24,7 @@ class Surface(MainBase):
         df.columns = ["nobs", "Date/Time", "lat", "lon", "stnID", "stntype", "stnHgt",  # tag
                       "Flag", "Pressure", "Pmsl", "T2m", "Td2m", "RH2m", "Wd10m", "Ws10m"]  # field
         # df = df.drop(columns=["nobs"])
-        df.insert(0, "datetime", self.config.get("GLOBAL", "FILE_DATE"))
+        df.insert(0, "datetime", self.config.get("GLOBAL", "FILE_DATE")+'00')
         df["datetime"] = pd.to_datetime(df["datetime"], format="%Y%m%d%H%M%S")
         df["Date/Time"] = pd.to_datetime(df["Date/Time"], format="%Y%m%d%H%M%S")
         database.write_mysql(file_name, df)

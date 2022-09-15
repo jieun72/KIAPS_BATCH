@@ -22,9 +22,9 @@ class Amsua(MainBase):
                                  "/" +
                                  self.config.get('AMSUA', 'AMSUA') % (self.config.get("GLOBAL", "FILE_DATE")),
             delim_whitespace=True, skiprows=1, header=None)
-        df_amsua.insert(0, 'datetime', self.config.get("GLOBAL", "FILE_DATE"))
+        df_amsua.insert(0, 'datetime', self.config.get("GLOBAL", "FILE_DATE")+'00')
         df_amsua["datetime"] = pd.to_datetime(df_amsua["datetime"], format="%Y%m%d%H%M%S")
-        df_amsua.columns = ["datetime", "nobs", "latitude", "longitude", "Brightness temperature", "Satellite ID number"]
+        df_amsua.columns = ["datetime", "iobs", "lat", "lon", "isat", "obs-time", "ob(01)", "ob(02)", "ob(03)", "ob(04)", "ob(05)", "ob(06)", "ob(07)", "ob(08)", "ob(09)", "ob(10)", "ob(11)", "ob(12)", "ob(13)", "ob(14)", "ob(15)"]
         database.write_mysql(file_name, df_amsua)
         print('done')
 

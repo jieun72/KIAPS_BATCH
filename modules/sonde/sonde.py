@@ -42,7 +42,7 @@ class Sonde(MainBase):
             df = pd.DataFrame(result_list)
             df.columns = ["nobs", "type", "StnID", "lat", "lon", "StnHgt", "nlev", "ObsTime",
                           "lev", "Pressure", "Height", "GPM", "T", "Td", "RH", "Wd", "Ws", "u", "v", "q", "vsign", "vlon", "vlat", "time"]
-            df.insert(0, "datetime", self.config.get("GLOBAL", "FILE_DATE"))
+            df.insert(0, "datetime", self.config.get("GLOBAL", "FILE_DATE")+'00')
             df["datetime"] = pd.to_datetime(df["datetime"], format="%Y%m%d%H%M%S")
             df["nobs"] = df["nobs"].astype(int)
             df["type"] = df["type"].astype(int)
