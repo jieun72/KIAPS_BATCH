@@ -42,6 +42,7 @@ class SondeGRQC(MainBase):
                           "rh", "rh_flag", "q", "q_flag", "z", "z_flag", 
                           "mflag", "avail"]
 
+            df = df.drop([df.columns[8]], axis=1)
             df.insert(0, "datetime", self.config.get("GLOBAL", "FILE_DATE")+'00')
             df["datetime"] = pd.to_datetime(df["datetime"], format="%Y%m%d%H%M%S")
             df["nobs"] = df["nobs"].astype(int)
@@ -52,43 +53,36 @@ class SondeGRQC(MainBase):
             df["StnHgt"] = df["StnHgt"].astype(float)
             df["nlev"] = df["nlev"].astype(int)
             df["ObsTime"] = df["ObsTime"].astype('datetime64[ns]')
-            df["lev"] = df["lev"].astype(int)
+            # df["lev"] = df["lev"].astype(int)
             df["Pressure"] = df["Pressure"].astype(float)
 
             df["T"] = df["T"].astype(float)
             df["T_flag"] = df["T_flag"].astype(float)
-            df.insert(13, "T_GR_QC", np.nan)
-            # df["T_GR_QC"] = df["T_GR_QC"].astype(int)
+            df.insert(12, "T_GR_QC", np.nan)
 
             df["Wd"] = df["Wd"].astype(float)
             df["Wd_flag"] = df["Wd_flag"].astype(float)
-            df.insert(16, "Wd_GR_QC", np.nan)
-            # df["Wd_GR_QC"] = np.nan
+            df.insert(15, "Wd_GR_QC", np.nan)
 
             df["Ws"] = df["Ws"].astype(float)
             df["Ws_flag"] = df["Ws_flag"].astype(float)
-            df.insert(19, "Ws_GR_QC", np.nan)
-            # df["Ws_GR_QC"] = np.nan
+            df.insert(18, "Ws_GR_QC", np.nan)
 
             df["U"] = df["U"].astype(float)
             df["U_flag"] = df["U_flag"].astype(float)
-            df.insert(22, "U_GR_QC", np.nan)
-            # df["U_GR_QC"] = np.nan
+            df.insert(21, "U_GR_QC", np.nan)
 
             df["V"] = df["V"].astype(float)
             df["V_flag"] = df["V_flag"].astype(float)
-            df.insert(25, "V_GR_QC", np.nan)
-            # df["V_GR_QC"] = np.nan
+            df.insert(24, "V_GR_QC", np.nan)
 
             df["rh"] = df["rh"].astype(float)
             df["rh_flag"] = df["rh_flag"].astype(float)
-            df.insert(28, "rh_GR_QC", np.nan)
-            # df["rh_GR_QC"] = np.nan
+            df.insert(27, "rh_GR_QC", np.nan)
 
             df["q"] = df["q"].astype(float)
             df["q_flag"] = df["q_flag"].astype(float)
-            df.insert(31, "q_GR_QC", np.nan)
-            # df["q_GR_QC"] = np.nan
+            df.insert(30, "q_GR_QC", np.nan)
 
             df["z"] = df["z"].astype(float)
             df["z_flag"] = df["z_flag"].astype(float)
