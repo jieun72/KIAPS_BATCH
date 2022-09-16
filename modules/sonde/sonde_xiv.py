@@ -1,6 +1,7 @@
 import re
 
 import pandas as pd
+import numpy as np
 
 from libs import database
 from libs.kiapslogging import KiapsLogging
@@ -18,8 +19,8 @@ class SondeXiv(MainBase):
     def db_transfer(self, file_name):
         print(file_name)
         with open(self.config.get("DIRECTORY", "DATA_PATH") +
-                  "/sonde/" +
-                  self.config.get("GLOBAL", "FILE_DATE") +
+                  "/sonde/sonde_" +
+                  self.config.get("GLOBAL", "FILE_DATE")[:6] +
                   "/" +
                   self.config.get('SONDE', 'SONDE_XIV') % (self.config.get("GLOBAL", "FILE_DATE")), "r") as reader:
             result_list = []
@@ -35,37 +36,43 @@ class SondeXiv(MainBase):
                     result_list.append(mst_list + words)
 
             df = pd.DataFrame(result_list)
-            df.columns = ["datetime", "tobs", "StnID", "obtype", "nlev", "lat", "lon", "StnHgt", "TimeDiff",
-                          "lev", "Pressure", "Temp", "Temp_flag", "Temp_OmB", "U-comp", "U-comp_flag", "U-comp_OmB",
-                          "V-comp", "V-comp_flag", "V-comp_OmB", "RH", "RH_flag", "RH_OmB", "Q", "Q_flag", "Q_OmB",
-                          "Mflag", "avail"]
+            df.columns = ["datetime", "nobs", "StnID", "type", "nlev", "lat", "lon", "StnHgt", "ObsTime",
+                          "lev", "Pressure", "T", "T_flag", "T_OmB", "U", "U_flag", "U_OmB",
+                          "V", "V_flag", "V_OmB", "rh", "rh_flag", "rh_OmB", "q", "q_flag", "q_OmB",
+                          "mflag", "avail"]
+
+            df = df.drop([df.columns[9], df.columns[13], df.columns[16], df.columns[19], df.columns[22], df.columns[25]], axis=1)
             df["datetime"] = df["datetime"].astype('datetime64[ns]')
-            df["tobs"] = df["tobs"].astype(int)
+            df["nobs"] = df["nobs"].astype(int)
             df["StnID"] = df["StnID"].astype(int)
-            df["obtype"] = df["obtype"].astype(str)
+            df["type"] = df["type"].astype(str)
             df["nlev"] = df["nlev"].astype(int)
             df["lat"] = df["lat"].astype(float)
             df["lon"] = df["lon"].astype(float)
-            df["StnHgt"] = df["StnHgt"].astype(float)
-            df["TimeDiff"] = df["TimeDiff"].astype(float)
 
-            df["lev"] = df["lev"].astype(int)
+            df["StnHgt"] = df["StnHgt"].astype(float)
+            
+            # TODO: TimeDiff 수정예정
+            df["ObsTime"] = np.nan
+
             df["Pressure"] = df["Pressure"].astype(float)
-            df["Temp"] = df["Temp"].astype(float)
-            df["Temp_flag"] = df["Temp_flag"].astype(float)
-            df["Temp_OmB"] = df["Temp_OmB"].astype(float)
-            df["U-comp"] = df["U-comp"].astype(float)
-            df["U-comp_flag"] = df["U-comp_flag"].astype(float)
-            df["U-comp_OmB"] = df["U-comp_OmB"].astype(float)
-            df["V-comp"] = df["V-comp"].astype(float)
-            df["V-comp_flag"] = df["V-comp_flag"].astype(float)
-            df["V-comp_OmB"] = df["V-comp_OmB"].astype(float)
-            df["RH"] = df["RH"].astype(float)
-            df["RH_flag"] = df["RH_flag"].astype(float)
-            df["RH_OmB"] = df["RH_OmB"].astype(float)
-            df["Q"] = df["Q"].astype(float)
-            df["Q_flag"] = df["Q_flag"].astype(float)
-            df["Q_OmB"] = df["Q_OmB"].astype(float)
-            df["Mflag"] = df["Mflag"].astype(float)
+
+            df["T"] = df["T"].astype(float)
+            df["T_flag"] = df["T_flag"].astype(float)
+
+            df["U"] = df["U"].astype(float)
+            df["U_flag"] = df["U_flag"].astype(float)
+
+            df["V"] = df["V"].astype(float)
+            df["V_flag"] = df["V_flag"].astype(float)
+            
+            df["rh"] = df["rh"].astype(float)
+            df["rh_flag"] = df["rh_flag"].astype(float)
+            
+            df["q"] = df["q"].astype(float)
+            df["q_flag"] = df["q_flag"].astype(float)
+            
+            df["mflag"] = df["mflag"].astype(float)
             df["avail"] = df["avail"].astype(float)
-            database.write_mysql(file_name, df)
+
+            database.write_mysql("sonde_grqc", df)

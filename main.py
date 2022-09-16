@@ -11,10 +11,10 @@ class Main:
         # amsua.Amsua().amsua_xiv_ch("amsua_xiv_ch")
 
         # sonde.Sonde().db_transfer("sonde")
-        sonde_grqc.SondeGRQC().db_transfer("sonde_grqc")
+        # sonde_grqc.SondeGRQC().db_transfer("sonde_grqc")
         # sonde_innqc.SondeInnQC().db_transfer("sonde_innqc")
         # sonde_thin.SondeThin().db_transfer("sonde_thin")
-        # sonde_xiv.SondeXiv().db_transfer("sonde_xiv")
+        sonde_xiv.SondeXiv().db_transfer("sonde_xiv")
 
         # surface.Surface().db_transfer("surface")
         # surface_grqc.SurfaceGRQC().db_transfer("surface_grqc")
