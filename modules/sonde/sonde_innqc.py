@@ -2,6 +2,7 @@ import re
 
 import pandas as pd
 import numpy as np
+import datetime
 
 from libs import database
 from libs.kiapslogging import KiapsLogging
@@ -52,7 +53,9 @@ class SondeInnQC(MainBase):
             df["lat"] = df["lat"].astype(float)
             df["lon"] = df["lon"].astype(float)
             df["StnHgt"] = df["StnHgt"].astype(float)
-            df["ObsTime"] = np.nan
+            
+            fileDateTime = datetime.datetime.strptime(self.config.get("GLOBAL", "FILE_DATE"),"%Y%m%d%H")
+            df["ObsTime"] = (fileDateTime + pd.to_timedelta(df["ObsTime"].astype(float), unit="hours")).dt.round('1min')
 
             df["Pressure"] = df["Pressure"].astype(float)
             df["T"] = df["T"].astype(float)
