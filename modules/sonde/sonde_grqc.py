@@ -89,4 +89,5 @@ class SondeGRQC(MainBase):
 
             df["mflag"] = df["mflag"].astype(float)
             df["avail"] = df["avail"].astype(float)
+            df["xivFlg"] = 0
             database.write_mysql(file_name, df)

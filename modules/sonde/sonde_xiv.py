@@ -75,5 +75,5 @@ class SondeXiv(MainBase):
             
             df["mflag"] = df["mflag"].astype(float)
             df["avail"] = df["avail"].astype(float)
-
+            df["xivFlg"] = 1
             database.write_mysql("sonde_grqc", df)
