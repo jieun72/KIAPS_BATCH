@@ -12,13 +12,13 @@ class Main:
 
         # sonde.Sonde().db_transfer("sonde")
         # sonde_grqc.SondeGRQC().db_transfer("sonde_grqc")
-        # sonde_innqc.SondeInnQC().db_transfer("sonde_innqc")
+        # sonde_innqc.SondeInnQC().db_transfer("sonde_innoqc")
         # sonde_thin.SondeThin().db_transfer("sonde_thin")
-        sonde_xiv.SondeXiv().db_transfer("sonde_xiv")
+        # sonde_xiv.SondeXiv().db_transfer("sonde_xiv")
 
         # surface.Surface().db_transfer("surface")
         # surface_grqc.SurfaceGRQC().db_transfer("surface_grqc")
-        # surface_innqc.SurfaceInnQC().db_transfer("surface_innqc")
+        surface_innqc.SurfaceInnQC().db_transfer("surface_innoqc")
         # surface_thin.SurfaceThin().db_transfer("surface_thin")
         # surface_xiv.SurfaceXiv().db_transfer("surface_xiv")
 

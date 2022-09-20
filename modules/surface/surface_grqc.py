@@ -63,6 +63,7 @@ class SurfaceGRQC(MainBase):
         df["Pressure_GR_QC"] = np.nan
         df["T2m_GR_QC"] = np.nan
         df["RH2m_GR_QC"] = np.nan
+        df["Q2m_GR_QC"] = np.nan
         df["U10m_GR_QC"] = np.nan
         df["V10m_GR_QC"] = np.nan
         df["WD10m_GR_QC"] = np.nan
