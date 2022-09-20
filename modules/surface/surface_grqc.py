@@ -1,4 +1,3 @@
-import re
 import pandas as pd
 import numpy as np
 
@@ -46,6 +45,8 @@ class SurfaceGRQC(MainBase):
         df["PMSL_flag"] = df["PMSL_flag"].astype(float)
         df["T2m"] = df["T2m"].astype(float)
         df["T2m_flag"] = df["T2m_flag"].astype(float)
+        df["Td2m"] = df["Td2m"].astype(float)
+        df["Td2m_flag"] = df["Td2m_flag"].astype(float)
         df["RH2m"] = df["RH2m"].astype(float)
         df["RH2m_flag"] = df["RH2m_flag"].astype(float)
         df["Q2m"] = df["Q2m"].astype(float)
