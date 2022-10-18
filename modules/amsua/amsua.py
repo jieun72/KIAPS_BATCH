@@ -1,3 +1,4 @@
+from __future__ import division
 import dask.dataframe as dd
 import pandas as pd
 
@@ -37,8 +38,7 @@ class Amsua(MainBase):
                                        "/" +
                                        self.config.get('AMSUA', 'AMSUA_GRQC') % (self.config.get("GLOBAL", "FILE_DATE")),
             delim_whitespace=True, header=0)
-        ddf_amsua_grqc["datetime"] = pd.to_datetime(self.config.get("GLOBAL", "FILE_DATE"), format="%Y%m%d%H%M%S")
-        ddf_amsua_grqc = ddf_amsua_grqc[["datetime", "pixel", "lat", "lon", "irej", "qcflag", "seaice_indx", "scatt_indx", "clw", "ichk(4)", "tb(4)", "ichk(5)", "tb(5)", "ichk(6)", "tb(6)", "ichk(7)", "tb(7)", "ichk(8)", "tb(8)", "ichk(9)", "tb(9)", "ichk(10)", "tb(10)", "ichk(11)", "tb(11)", "ichk(12)", "tb(12)", "ichk(13)", "tb(13)", "ichk(14)", "tb(14)"]]
+        ddf_amsua_grqc["datetime"] = pd.to_datetime(self.config.get("GLOBAL", "FILE_DATE")+'00', format="%Y%m%d%H%M%S")
         database.write_mysql_dask(file_name, ddf_amsua_grqc)
         print('done')
 
@@ -125,3 +125,61 @@ class Amsua(MainBase):
         df_amsua_xiv_ch14['kind'] = 14
         database.write_mysql(file_name, df_amsua_xiv_ch14)
         print('done')
+
+    @KiapsLogging.log_decorator
+    def amsua_innoqc(self, file_name):
+        print(file_name)
+        ddf_amsua_innoqc = dd.read_table(self.config.get("DIRECTORY", "DATA_PATH") +
+                                          "/amsua/" +
+                                         self.config.get("GLOBAL", "FILE_DATE") +
+                                          "/" +
+                                         self.config.get('AMSUA', 'AMSUA_INNQC') % (self.config.get("GLOBAL", "FILE_DATE")),
+            delim_whitespace=True, header=0)
+        ddf_amsua_innoqc["datetime"] = pd.to_datetime(self.config.get("GLOBAL", "FILE_DATE")+'00', format="%Y%m%d%H%M%S")
+
+        df1 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'isat', 'bpos', 'irej', 'QCflag', 'sfctype', 'obstdif', 'ob(01)', 'cob(01)', 'bk(01)', 'ck(01)']]
+        database.write_mysql_dask('amsua_innoqc_ch1', df1)
+
+        df2 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(02)', 'cob(02)', 'bk(02)', 'ck(02)']]
+        database.write_mysql_dask('amsua_innoqc_ch2', df2)
+
+        df3 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(03)', 'cob(03)', 'bk(03)', 'ck(03)']]
+        database.write_mysql_dask('amsua_innoqc_ch3', df3)
+
+        df4 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(04)', 'cob(04)', 'bk(04)', 'ck(04)']]
+        database.write_mysql_dask('amsua_innoqc_ch4', df4)
+
+        df5 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(05)', 'cob(05)', 'bk(05)', 'ck(05)']]
+        database.write_mysql_dask('amsua_innoqc_ch5', df5)
+
+        df6 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(06)', 'cob(06)', 'bk(06)', 'ck(06)']]
+        database.write_mysql_dask('amsua_innoqc_ch6', df6)
+
+        df7 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(07)', 'cob(07)', 'bk(07)', 'ck(07)']]
+        database.write_mysql_dask('amsua_innoqc_ch7', df7)
+
+        df8 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(08)', 'cob(08)', 'bk(08)', 'ck(08)']]
+        database.write_mysql_dask('amsua_innoqc_ch8', df8)
+
+        df9 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(09)', 'cob(09)', 'bk(09)', 'ck(09)']]
+        database.write_mysql_dask('amsua_innoqc_ch9', df9)
+
+        df10 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(10)', 'cob(10)', 'bk(10)', 'ck(10)']]
+        database.write_mysql_dask('amsua_innoqc_ch10', df10)
+
+        df11 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(11)', 'cob(11)', 'bk(11)', 'ck(11)']]
+        database.write_mysql_dask('amsua_innoqc_ch11', df11)
+
+        df12 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(12)', 'cob(12)', 'bk(12)', 'ck(12)']]
+        database.write_mysql_dask('amsua_innoqc_ch12', df12)
+
+        df13 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(13)', 'cob(13)', 'bk(13)', 'ck(13)']]
+        database.write_mysql_dask('amsua_innoqc_ch13', df13)
+
+        df14 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(14)', 'cob(14)', 'bk(14)', 'ck(14)']]
+        database.write_mysql_dask('amsua_innoqc_ch14', df14)
+
+        df15 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'irej', 'QCflag', 'ob(15)', 'cob(15)', 'bk(15)', 'ck(15)']]
+        database.write_mysql_dask('amsua_innoqc_ch15', df15)
+
+        print("done")

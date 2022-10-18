@@ -9,6 +9,7 @@ class Main:
         # amsua.Amsua().amsua_grqc("amsua_grqc")
         # amsua.Amsua().amsua_xiv_before_thin("amsua_xiv_before_thin")
         # amsua.Amsua().amsua_xiv_ch("amsua_xiv_ch")
+        amsua.Amsua().amsua_innoqc("amsua_innoqc")
 
         # sonde.Sonde().db_transfer("sonde")
         # sonde_grqc.SondeGRQC().db_transfer("sonde_grqc")
@@ -18,7 +19,7 @@ class Main:
 
         # surface.Surface().db_transfer("surface")
         # surface_grqc.SurfaceGRQC().db_transfer("surface_grqc")
-        surface_innqc.SurfaceInnQC().db_transfer("surface_innoqc")
+        # surface_innqc.SurfaceInnQC().db_transfer("surface_innoqc")
         # surface_thin.SurfaceThin().db_transfer("surface_thin")
         # surface_xiv.SurfaceXiv().db_transfer("surface_xiv")
 
