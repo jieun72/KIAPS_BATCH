@@ -21,7 +21,7 @@ def write_mysql(table_name, df):
 def write_mysql_dask(table_name, ddf):
     connection_url = "mysql+pymysql://kiaps:Q1w2e3r4t%@192.168.1.252:3306/kiaps?charset=utf8"
     ddf.to_sql(name=table_name, uri=connection_url, if_exists="append", index=False)
-    print(">>> All good.")
+    print(">>> All good." + table_name)
 
 
 # def write_mongodb(table_name, df):
