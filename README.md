@@ -13,5 +13,6 @@
   ```
   > 실행 방법
   ```
-    python main.py 2020061600
+    python main.py --date_time 2021062118 --file_type surface_grqc
+    python convert_text.py
   ```

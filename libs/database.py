@@ -11,7 +11,7 @@ from sqlalchemy import create_engine
 
 
 def write_mysql(table_name, df):
-    connection_url = "mysql+pymysql://kiaps:Q1w2e3r4t%@192.168.1.252:3306/kiaps?charset=utf8"
+    connection_url = "mysql+pymysql://kiaps:Q1w2e3r4t%@192.168.1.129:3306/kiaps?charset=utf8"
     engine = create_engine(connection_url)
     with engine.begin():
         df.to_sql(name=table_name, con=engine, if_exists="append", index=False)
@@ -19,7 +19,7 @@ def write_mysql(table_name, df):
 
 
 def write_mysql_dask(table_name, ddf):
-    connection_url = "mysql+pymysql://kiaps:Q1w2e3r4t%@192.168.1.252:3306/kiaps?charset=utf8"
+    connection_url = "mysql+pymysql://kiaps:Q1w2e3r4t%@192.168.1.129:3306/kiaps?charset=utf8"
     ddf.to_sql(name=table_name, uri=connection_url, if_exists="append", index=False)
     print(">>> All good." + table_name)
 

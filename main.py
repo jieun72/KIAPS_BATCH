@@ -1,32 +1,35 @@
+import argparse
+
 from modules.amsua import amsua
 from modules.sonde import sonde, sonde_innqc, sonde_grqc, sonde_thin, sonde_xiv
 from modules.surface import surface, surface_grqc, surface_innqc, surface_thin, surface_xiv
 
 
 class Main:
-    def __init__(self):
-        # amsua.Amsua().amsua("amsua")
-        # amsua.Amsua().amsua_grqc("amsua_grqc")
-        # amsua.Amsua().amsua_xiv_before_thin("amsua_xiv_before_thin")
-        # amsua.Amsua().amsua_xiv_ch("amsua_xiv_ch")
-        amsua.Amsua().amsua_innoqc("amsua_innoqc")
-
-        # sonde.Sonde().db_transfer("sonde")
-        # sonde_grqc.SondeGRQC().db_transfer("sonde_grqc")
-        # sonde_innqc.SondeInnQC().db_transfer("sonde_innoqc")
-        # sonde_thin.SondeThin().db_transfer("sonde_thin")
-        # sonde_xiv.SondeXiv().db_transfer("sonde_xiv")
-
-        # surface.Surface().db_transfer("surface")
-        # surface_grqc.SurfaceGRQC().db_transfer("surface_grqc")
-        # surface_innqc.SurfaceInnQC().db_transfer("surface_innoqc")
-        # surface_thin.SurfaceThin().db_transfer("surface_thin")
-        # surface_xiv.SurfaceXiv().db_transfer("surface_xiv")
-
-
+    def __init__(self, file_type):
+        print("file_type: " + file_type)
+        if file_type == "amsua_grqc" :
+            amsua.Amsua().amsua_grqc("amsua_grqc")
+        if file_type == "amsua_xiv_before_thin" :
+            amsua.Amsua().amsua_xiv_before_thin("amsua_xiv_before_thin")
+        
+        if file_type == "sonde_grqc" :
+            sonde_grqc.SondeGRQC().db_transfer("sonde_grqc")
+        if file_type == "sonde_innqc" :
+            sonde_innqc.SondeInnQC().db_transfer("sonde_innqc")
+        
+        if file_type == "surface_grqc" :
+            surface_grqc.SurfaceGRQC().db_transfer("surface_grqc")
+        if file_type == "surface_innqc" :
+            surface_innqc.SurfaceInnQC().db_transfer("surface_innqc")
+        
 if __name__ == '__main__':
     try:
-        Main()
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--date_time", default="2020061600")
+        parser.add_argument("--file_type", default="amsua")
+        args = parser.parse_args()
+        Main(args.file_type)
     except KeyboardInterrupt:
         pass
     except Exception as e:
