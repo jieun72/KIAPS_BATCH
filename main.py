@@ -1,8 +1,8 @@
 import argparse
 
 from modules.amsua import amsua
-from modules.sonde import sonde, sonde_innqc, sonde_grqc, sonde_thin, sonde_xiv
-from modules.surface import surface, surface_grqc, surface_innqc, surface_thin, surface_xiv
+from modules.sonde import sonde_innqc, sonde_grqc, sonde_ai
+from modules.surface import surface_grqc, surface_innqc
 
 
 class Main:
@@ -17,6 +17,8 @@ class Main:
             sonde_grqc.SondeGRQC().db_transfer("sonde_grqc")
         if file_type == "sonde_innqc" :
             sonde_innqc.SondeInnQC().db_transfer("sonde_innqc")
+        if file_type == "sonde_ai" :
+            sonde_ai.SondeAI().db_transfer("sonde_ai")
         
         if file_type == "surface_grqc" :
             surface_grqc.SurfaceGRQC().db_transfer("surface_grqc")
