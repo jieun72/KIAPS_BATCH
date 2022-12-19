@@ -24,10 +24,12 @@ class SondeAI(MainBase):
 
         df.columns = ["no", "ObsTime", "StnID", "Pressure", "T", "AI_QC_PASS", "lower", "mu", "upper"]
 
-        df = df.drop(columns=["no", "ObsTime"])
+        df = df.drop(columns=["no"])
         df.insert(0, "datetime", self.config.get("GLOBAL", "FILE_DATE")+'00')
         df["datetime"] = pd.to_datetime(df["datetime"], format="%Y%m%d%H%M%S")
-        
+
+        df["ObsTime"] = pd.to_datetime(df["ObsTime"], format="%Y%m%d%H%M%S")
+
         df["StnID"] = df["StnID"].astype(int)
         df["Pressure"] = df["Pressure"].astype(float)
         df["T"] = df["T"].astype(float)
