@@ -134,7 +134,7 @@ class Amsua(MainBase):
                                          self.config.get("GLOBAL", "FILE_DATE") +
                                           "/" +
                                          self.config.get('AMSUA', 'AMSUA_INNQC') % (self.config.get("GLOBAL", "FILE_DATE")),
-            delim_whitespace=True, header=0, dtye={'ck(01)': 'float64', 'ck(02)': 'float64', 'ck(03)': 'float64', 'ck(04)': 'float64', 'ck(05)': 'float64', 'ck(06)': 'float64', 'ck(07)': 'float64', 'ck(08)': 'float64', 'ck(09)': 'float64', 'ck(10)': 'float64', 'ck(11)': 'float64', 'ck(12)': 'float64', 'ck(13)': 'float64', 'ck(14)': 'float64', 'ck(15)': 'float64'})
+            delim_whitespace=True, header=0, dtype={'ck(01)': 'float64', 'ck(02)': 'float64', 'ck(03)': 'float64', 'ck(04)': 'float64', 'ck(05)': 'float64', 'ck(06)': 'float64', 'ck(07)': 'float64', 'ck(08)': 'float64', 'ck(09)': 'float64', 'ck(10)': 'float64', 'ck(11)': 'float64', 'ck(12)': 'float64', 'ck(13)': 'float64', 'ck(14)': 'float64', 'ck(15)': 'float64'})
         ddf_amsua_innoqc["datetime"] = pd.to_datetime(self.config.get("GLOBAL", "FILE_DATE")+'00', format="%Y%m%d%H%M%S")
 
         df1 = ddf_amsua_innoqc[['datetime', 'iobs', 'lat', 'lon', 'isat', 'bpos', 'irej', 'QCflag', 'sfctype', 'obstdif', 'ob(01)', 'cob(01)', 'bk(01)', 'ck(01)']]
